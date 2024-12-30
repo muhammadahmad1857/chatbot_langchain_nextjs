@@ -2,7 +2,6 @@ import CallToAction from "@/sections/CallToAction";
 import Companies from "@/sections/Companies";
 import Technologies from "@/sections/Technologies";
 import Hero from "@/sections/Hero";
-// import Pricing from "@/sections/Pricing";
 import Members from "@/sections/members";
 import { ProjectsSection } from "@/sections/Projects";
 
