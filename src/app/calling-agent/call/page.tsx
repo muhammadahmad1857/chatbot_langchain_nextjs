@@ -141,91 +141,84 @@ const CallPage: React.FC = () => {
     setFormState({ ...formState, [key]: value });
   };
 
-//   const handleSubmit = async () => {
+  //   const handleSubmit = async () => {
 
-//     if (!formState.phone_number.trim() || !formState.task.trim()) {
-//       toast.error("Please fill in all required fields.");
-//       return;
-//     }
+  //     if (!formState.phone_number.trim() || !formState.task.trim()) {
+  //       toast.error("Please fill in all required fields.");
+  //       return;
+  //     }
 
-//     try {
-//       setLoading(true);
-//       const res = await fetch("https://bland.abubakarkhalid.com/send_call", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(formState),
-//       });
+  //     try {
+  //       setLoading(true);
+  //       const res = await fetch("https://bland.abubakarkhalid.com/send_call", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(formState),
+  //       });
 
-//       if (!res.ok) {
-//         throw new Error("Failed to submit the form");
-//       }
+  //       if (!res.ok) {
+  //         throw new Error("Failed to submit the form");
+  //       }
 
-//       const result = await res.json();
-      
-//       toast.success("Call details submitted successfully!");
-//       setShowBasic(false);
-//       setShowAdvanced(false);
-//       setShowResponse(true);
-//     } catch (error) {
-//       toast.error("An error occurred while submitting the call.");
-//       console.error(error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+  //       const result = await res.json();
 
+  //       toast.success("Call details submitted successfully!");
+  //       setShowBasic(false);
+  //       setShowAdvanced(false);
+  //       setShowResponse(true);
+  //     } catch (error) {
+  //       toast.error("An error occurred while submitting the call.");
+  //       console.error(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-const handleSubmit = async () => {
-  if (!formState.phone_number.trim() || !formState.task.trim()) {
-    toast.error("Please fill in all required fields.");
-    return;
-  }
-
-  try {
-    setLoading(true);
-
-    // Initial API call to send the call details
-    const { data: callResponse } = await axios.post(
-      "https://bland.abubakarkhalid.com/send_call",
-      formState,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const callId = callResponse.callId;
-
-    if (!callId) {
-      throw new Error("Call ID not received from the API.");
+  const handleSubmit = async () => {
+    if (!formState.phone_number.trim() || !formState.task.trim()) {
+      toast.error("Please fill in all required fields.");
+      return;
     }
 
-    toast.success("Call details submitted successfully!");
+    try {
+      setLoading(true);
 
-    // Call the second API to fetch the call transcript
-    const { data: transcriptResponse } = await axios.get(
-      `https://bland.abubakarkhalid.com/call_transcript/${callId}`
-    );
+      // Initial API call to send the call details
+      const { data: callResponse } = await axios.post(
+        "https://bland.abubakarkhalid.com/send_call",
+        formState
+      );
 
-    setResponse(transcriptResponse); // Assuming the response contains the transcript
+      const callId = callResponse.callId;
 
-    setShowBasic(false);
-    setShowAdvanced(false);
-    setShowResponse(true);
-  } catch (error: any) {
-    toast.error(
-      error.response?.data?.message ||
-        "An error occurred while processing the request."
-    );
-    console.error("Error:", error.message);
-  } finally {
-    setLoading(false);
-  }
-};
+      if (!callId) {
+        throw new Error("Call ID not received from the API.");
+      }
 
+      toast.success("Call details submitted successfully!");
+
+      // Call the second API to fetch the call transcript
+      const { data: transcriptResponse } = await axios.get(
+        `https://bland.abubakarkhalid.com/call_transcript/${callId}`
+      );
+
+      setResponse(transcriptResponse); // Assuming the response contains the transcript
+
+      setShowBasic(false);
+      setShowAdvanced(false);
+      setShowResponse(true);
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.message ||
+          "An error occurred while processing the request."
+      );
+      console.error("Error:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="container px-4 py-10">
