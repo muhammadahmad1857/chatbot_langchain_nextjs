@@ -206,7 +206,7 @@ const CallPage: React.FC = () => {
         error.response?.data?.message ||
           "An error occurred while processing the request."
       );
-      console.log(error)
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -229,8 +229,12 @@ const CallPage: React.FC = () => {
       const { status, summary, concatenated_transcript } = JSON.parse(
         response.data
       );
+      console.log(status);
 
       if (status === "queued") {
+        toast.info("Call is not initialized yet.");
+        setTimeout(() => setTranscriptDisabled(false), 10000);
+      } else if (status === "ringing") {
         toast.info("Call is not initialized yet.");
         setTimeout(() => setTranscriptDisabled(false), 10000);
       } else if (status === "no-answer") {
