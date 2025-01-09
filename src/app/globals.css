@@ -2,46 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-html{
+html {
   scroll-behavior: smooth;
 }
 
 @layer base {
   :root {
-    --color-violet-400: theme('colors.violet.400');
-    --color-fuchsia-400: theme('colors.fuchsia.400');
-    --color-fuchsia-900: theme('colors.fuchsia.900');
-    --color-amber-300: theme('colors.amber.300');
-    --color-teal-300: theme('colors.teal.300');
-    --color-gray-950: theme('colors.gray.950');
-    --color-indigo-900: theme('colors.indigo.900');
-    --color-border: theme('colors.gray.200/20%');
+    --color-violet-400: theme("colors.violet.400");
+    --color-fuchsia-400: theme("colors.fuchsia.400");
+    --color-fuchsia-900: theme("colors.fuchsia.900");
+    --color-amber-300: theme("colors.amber.300");
+    --color-teal-300: theme("colors.teal.300");
+    --color-gray-950: theme("colors.gray.950");
+    --color-indigo-900: theme("colors.indigo.900");
+    --color-border: theme("colors.gray.200/20%");
   }
-
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
   .absolute-center {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
   }
 
   .border-gradient {
-    @apply border-2 border-transparent [background:linear-gradient(_var(--color-gray-950),_var(--color-gray-950))_padding-box,conic-gradient(from_45deg,_var(--color-violet-400),_var(--color-fuchsia-400),_var(--color-amber-300),_var(--color-teal-300),_var(--color-violet-400))_border-box]
+    @apply border-2 border-transparent [background:linear-gradient(_var(--color-gray-950),_var(--color-gray-950))_padding-box,conic-gradient(from_45deg,_var(--color-violet-400),_var(--color-fuchsia-400),_var(--color-amber-300),_var(--color-teal-300),_var(--color-violet-400))_border-box];
   }
 
   .linear-gradient {
-    @apply bg-[linear-gradient(to_right,_var(--color-amber-300),_var(--color-teal-300),_var(--color-violet-400),_var(--color-fuchsia-400))]
+    @apply bg-[linear-gradient(to_right,_var(--color-amber-300),_var(--color-teal-300),_var(--color-violet-400),_var(--color-fuchsia-400))];
   }
 
   .radial-gradient {
-    @apply bg-[radial-gradient(circle_farthest-corner,_var(--color-fuchsia-900)_50%,_var(--color-indigo-900)_75%,transparent)] [mask-image:radial-gradient(circle_farthest-side,black,transparent)]
+    @apply bg-[radial-gradient(circle_farthest-corner,_var(--color-fuchsia-900)_50%,_var(--color-indigo-900)_75%,transparent)] [mask-image:radial-gradient(circle_farthest-side,black,transparent)];
   }
   * {
-    scrollbar-width: thin; 
+    scrollbar-width: thin;
   }
-  
-  ::selection{
+
+  ::selection {
     background: var(--color-fuchsia-400);
     color: white;
   }
-  ::moz-selection{
+  ::moz-selection {
     background: var(--color-fuchsia-400);
     color: white;
   }

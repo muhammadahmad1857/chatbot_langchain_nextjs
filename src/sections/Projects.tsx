@@ -7,9 +7,9 @@ import CheckCircleIcon from "@/assets/images/check-circle.svg";
 import ArrowUpRightIcon from "@/assets/images/arrow-up-right.svg";
 import grainImage from "@/assets/images/grain.jpg";
 import project1 from "@/assets/images/art-emotion.webp";
-import project2 from "@/assets/images/pythonCodeGuru.webp";
-import project3 from "@/assets/images/nutrition.webp";
-import project4 from "@/assets/images/summarizer.webp";
+// import project2 from "@/assets/images/pythonCodeGuru.webp";
+// import project3 from "@/assets/images/nutrition.webp";
+// import project4 from "@/assets/images/summarizer.webp";
 
 // Components
 import { SectionBorder } from "@/components/SectionBorder";
@@ -17,43 +17,53 @@ import { SectionBorder } from "@/components/SectionBorder";
 // Example portfolio data
 const portfolioProjects = [
   {
-    title: "Art Emotion",
+    title: "Calling agent",
     results: [
-      { title: "Convert emotion to art" },
-      { title: "Can sing for you" },
+      { title: "Can call on your behalf" },
+      { title: "Can give you transcript of the call" },
     ],
-    link: "/art-emotion",
+    link: "/calling-agent",
     image: project1,
   },
-  {
-    title: "Python code guru",
-    results: [
-      { title: "analyze your python code" },
-      { title: "Accelerate your python skills" },
-    ],
-    link: "/python-code-guru",
-    image: project2,
-  },
-  {
-    title: "NutriPlan",
-    results: [
-      { title: "Supports personalized multi-cuisine diet plans." },
-      { title: "Highly rated for simplicity and accuracy." },
-    ],
-    link: "/nutriplan",
-    image: project3,
-  },
-  {
-    title: "Review Summarizer",
-    results: [
-      {
-        title: "Enhanced user experience with fast summarization.",
-      },
-      { title: "Widely praised for clarity and efficiency." },
-    ],
-    link: "/summarizer",
-    image: project4,
-  },
+  //  {
+  //   title: "Art Emotion",
+  //   results: [
+  //     { title: "Convert emotion to art" },
+  //     { title: "Can sing for you" },
+  //   ],
+  //   link: "/art-emotion",
+  //   image: project1,
+  // },
+  // {
+  //   title: "Python code guru",
+  //   results: [
+  //     { title: "analyze your python code" },
+  //     { title: "Accelerate your python skills" },
+  //   ],
+  //   link: "/python-code-guru",
+  //   image: project2,
+  // },
+  // {
+  //   title: "NutriPlan",
+  //   results: [
+  //     { title: "Supports personalized multi-cuisine diet plans." },
+  //     { title: "Highly rated for simplicity and accuracy." },
+  //   ],
+  //   link: "/nutriplan",
+  //   image: project3,
+  // },
+  // {
+  //   title: "Review Summarizer",
+  //   results: [
+  //     {
+  //       title: "Enhanced user experience with fast summarization.",
+  //     },
+  //     { title: "Widely praised for clarity and efficiency." },
+  //   ],
+  //   link: "/summarizer",
+  //   image: project4,
+  // },
+  
 ];
 
 export const ProjectsSection = () => {
