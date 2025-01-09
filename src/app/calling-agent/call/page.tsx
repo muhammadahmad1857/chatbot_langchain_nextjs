@@ -25,19 +25,19 @@ const CallPage: React.FC = () => {
       defaultValue: "",
     },
     {
-        key: "background_track",
-        type: "dropdown",
-        label: "Background Track",
-        options: ["null", "office", "cafe", "restaurant", "none"],
-        defaultValue: "office",
-      },
+      key: "background_track",
+      type: "dropdown",
+      label: "Background Track",
+      options: ["null", "office", "cafe", "restaurant", "none"],
+      defaultValue: "office",
+    },
     {
-        key: "first_sentence",
-        type: "textarea",
-        label: "First Sentence",
-        placeholder: "Enter the first sentence",
-        defaultValue: "",
-      },
+      key: "first_sentence",
+      type: "textarea",
+      label: "First Sentence",
+      placeholder: "Enter the first sentence",
+      defaultValue: "",
+    },
     {
       key: "task",
       type: "textarea",
@@ -52,8 +52,7 @@ const CallPage: React.FC = () => {
       options: ["Josh", "Florian", "Derek", "June", "Nat", "Paige"],
       defaultValue: "Nat",
     },
-    
-  
+
     {
       key: "language",
       type: "dropdown",
@@ -152,9 +151,7 @@ const CallPage: React.FC = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [callId, setCallId] = useState<string | null>(
-    "0a24fc06-b2a6-4dc0-959d-79094c7971bb"
-  );
+  const [callId, setCallId] = useState<string | null>(null);
   const [transcriptLoading, setTranscriptLoading] = useState(false);
   const [isTranscriptDisabled, setTranscriptDisabled] = useState(false);
   const [response, setResponse] = useState<string | null>(null);
@@ -195,7 +192,7 @@ const CallPage: React.FC = () => {
         payload
       );
 
-      const data = response.data;
+      const data = JSON.parse(response.data);
       const callId = data.call_id;
 
       if (!callId) {
@@ -209,6 +206,7 @@ const CallPage: React.FC = () => {
         error.response?.data?.message ||
           "An error occurred while processing the request."
       );
+      console.log(error)
     } finally {
       setLoading(false);
     }
@@ -283,10 +281,7 @@ const CallPage: React.FC = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             {basicFeatures.map((field) => (
-              <div
-                key={field.key}
-                
-              >
+              <div key={field.key}>
                 {field.type === "text" && (
                   <Input
                     id={field.key}
