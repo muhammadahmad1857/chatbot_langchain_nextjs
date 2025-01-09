@@ -43,7 +43,7 @@ const TextArea = ({
   }, [isFocused, angle]);
 
   return (
-    <div className={twMerge(`relative w-full  mx-auto `, className)}>
+    <div className={twMerge(`relative w-full max-w-md mx-auto `, className)}>
       {/* Label at the Top */}
       <motion.label
         htmlFor={id}

@@ -13,6 +13,7 @@ export type ButtonProps = {
   variant?: "primary" | "secondary" | "tertiary";
   block?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 } & HTMLAttributes<HTMLButtonElement>;
 
 const classes = cva(
@@ -42,6 +43,7 @@ export const Button = (props: ButtonProps) => {
     variant = "primary", // variant por defecto es primary
     children, // children prop is passed to the button
     onClick, // onClick prop is passed to the button
+    disabled = false,
     ...otherProps // other props are passed by cva
   } = props;
 
@@ -70,6 +72,7 @@ export const Button = (props: ButtonProps) => {
       className={classes({ ...otherProps, variant, className })}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      disabled={disabled}
       onClick={onClick}
       style={
         variant === "primary"

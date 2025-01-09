@@ -9,22 +9,40 @@ import TextArea from "@/components/Textarea";
 import Dropdown from "@/components/DropDown";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faChevronUp,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 const CallPage: React.FC = () => {
   const basicFeatures = [
-    {
-      key: "task",
-      type: "textarea",
-      label: "Task",
-      placeholder: "Enter task",
-      defaultValue: "",
-    },
     {
       key: "phone_number",
       type: "text",
       label: "Phone Number",
       placeholder: "Enter phone number",
+      defaultValue: "",
+    },
+    {
+        key: "background_track",
+        type: "dropdown",
+        label: "Background Track",
+        options: ["null", "office", "cafe", "restaurant", "none"],
+        defaultValue: "office",
+      },
+    {
+        key: "first_sentence",
+        type: "textarea",
+        label: "First Sentence",
+        placeholder: "Enter the first sentence",
+        defaultValue: "",
+      },
+    {
+      key: "task",
+      type: "textarea",
+      label: "Task",
+      placeholder: "Enter task",
       defaultValue: "",
     },
     {
@@ -34,13 +52,8 @@ const CallPage: React.FC = () => {
       options: ["Josh", "Florian", "Derek", "June", "Nat", "Paige"],
       defaultValue: "Nat",
     },
-    {
-      key: "background_track",
-      type: "dropdown",
-      label: "Background Track",
-      options: ["null", "office", "cafe", "restaurant", "none"],
-      defaultValue: "office",
-    },
+    
+  
     {
       key: "language",
       type: "dropdown",
@@ -54,64 +67,32 @@ const CallPage: React.FC = () => {
         "en-IN",
         "zh",
         "zh-CN",
-        "zh-Hans",
-        "es",
-        "es-419",
-        "fr",
-        "fr-CA",
-        "de",
-        "hi",
-        "ja",
-        "ar",
-        "pt",
-        "pt-BR",
       ],
-      defaultValue: "en-US",
+      defaultValue: "en",
     },
   ];
 
   const advancedFeatures = [
     {
-      key: "interruption_threshold",
-      type: "text",
-      label: "Interruption Threshold",
-      placeholder: "Enter interruption threshold",
-      defaultValue: "100",
-    },
-    {
-      key: "temperature",
-      type: "text",
-      label: "Temperature",
-      placeholder: "Enter temperature (e.g., 0.7)",
-      defaultValue: "0.7",
+      key: "wait_for_greeting",
+      type: "dropdown",
+      label: "Wait for Greeting",
+      options: ["true", "false"],
+      defaultValue: false,
     },
     {
       key: "block_interruptions",
       type: "dropdown",
       label: "Block Interruptions",
       options: ["true", "false"],
-      defaultValue: "false",
+      defaultValue: false,
     },
     {
-      key: "tools",
+      key: "interruption_threshold",
       type: "text",
-      label: "Tools",
-      placeholder: "Enter tools (comma-separated)",
-      defaultValue: "",
-    },
-    {
-      key: "ignore_button_press",
-      type: "dropdown",
-      label: "Ignore Button Press",
-      options: ["true", "false"],
-      defaultValue: "true",
-    },
-    {
-      key: "keywords",
-      type: "text",
-      label: "Keywords",
-      placeholder: "Enter keywords (comma-separated)",
-      defaultValue: "",
+      label: "Interruption Threshold",
+      placeholder: "Enter interruption threshold",
+      defaultValue: 100,
     },
     {
       key: "model",
@@ -120,61 +101,73 @@ const CallPage: React.FC = () => {
       placeholder: "Enter model",
       defaultValue: "enhanced",
     },
+    {
+      key: "temperature",
+      type: "text",
+      label: "Temperature",
+      placeholder: "Enter temperature (e.g., 0.7)",
+      defaultValue: 0.7,
+    },
+    {
+      key: "keywords",
+      type: "text",
+      label: "Keywords",
+      placeholder: "Enter keywords (comma-separated)",
+      defaultValue: [],
+    },
+    {
+      key: "noise_cancellation",
+      type: "dropdown",
+      label: "Noise Cancellation",
+      options: ["true", "false"],
+      defaultValue: true,
+    },
+    {
+      key: "ignore_button_press",
+      type: "dropdown",
+      label: "Ignore Button Press",
+      options: ["true", "false"],
+      defaultValue: true,
+    },
+    {
+      key: "tools",
+      type: "text",
+      label: "Tools",
+      placeholder: "Enter tools (comma-separated)",
+      defaultValue: [],
+    },
   ];
 
-  const [formState, setFormState] = useState<Record<string, string>>({
+  const [formState, setFormState] = useState<Record<string, any>>({
     ...Object.fromEntries(
       basicFeatures.map((field) => [field.key, field.defaultValue || ""])
     ),
     ...Object.fromEntries(
-      advancedFeatures.map((field) => [field.key, field.defaultValue || ""])
+      advancedFeatures.map((field) =>
+        Array.isArray(field.defaultValue)
+          ? [field.key, [...field.defaultValue]]
+          : [field.key, field.defaultValue || ""]
+      )
     ),
   });
 
   const [loading, setLoading] = useState(false);
+  const [callId, setCallId] = useState<string | null>(
+    "0a24fc06-b2a6-4dc0-959d-79094c7971bb"
+  );
+  const [transcriptLoading, setTranscriptLoading] = useState(false);
+  const [isTranscriptDisabled, setTranscriptDisabled] = useState(false);
+  const [response, setResponse] = useState<string | null>(null);
+  const [concatenatedTranscript, setConcatenatedTranscript] = useState<
+    string | null
+  >(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showBasic, setShowBasic] = useState(true);
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const [showResponse, setShowResponse] = useState(false);
-  const [response, setResponse] = useState<string | null>(null);
 
   const handleChange = (key: string, value: string) => {
     setFormState({ ...formState, [key]: value });
   };
-
-  //   const handleSubmit = async () => {
-
-  //     if (!formState.phone_number.trim() || !formState.task.trim()) {
-  //       toast.error("Please fill in all required fields.");
-  //       return;
-  //     }
-
-  //     try {
-  //       setLoading(true);
-  //       const res = await fetch("https://bland.abubakarkhalid.com/send_call", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(formState),
-  //       });
-
-  //       if (!res.ok) {
-  //         throw new Error("Failed to submit the form");
-  //       }
-
-  //       const result = await res.json();
-
-  //       toast.success("Call details submitted successfully!");
-  //       setShowBasic(false);
-  //       setShowAdvanced(false);
-  //       setShowResponse(true);
-  //     } catch (error) {
-  //       toast.error("An error occurred while submitting the call.");
-  //       console.error(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
 
   const handleSubmit = async () => {
     if (!formState.phone_number.trim() || !formState.task.trim()) {
@@ -185,38 +178,84 @@ const CallPage: React.FC = () => {
     try {
       setLoading(true);
 
-      // Initial API call to send the call details
-      const { data: callResponse } = await axios.post(
+      const payload = {
+        ...formState,
+        interruption_threshold: Number(formState.interruption_threshold),
+        temperature: Number(formState.temperature),
+        wait_for_greeting: formState.wait_for_greeting === "true",
+        block_interruptions: formState.block_interruptions === "true",
+        noise_cancellation: formState.noise_cancellation === "true",
+        ignore_button_press: formState.ignore_button_press === "true",
+        tools: Array.isArray(formState.tools) ? formState.tools : [],
+        keywords: Array.isArray(formState.keywords) ? formState.keywords : [],
+      };
+
+      const response = await axios.post(
         "https://bland.abubakarkhalid.com/send_call",
-        formState
+        payload
       );
 
-      const callId = callResponse.callId;
+      const data = response.data;
+      const callId = data.call_id;
 
       if (!callId) {
         throw new Error("Call ID not received from the API.");
       }
 
+      setCallId(callId);
       toast.success("Call details submitted successfully!");
-
-      // Call the second API to fetch the call transcript
-      const { data: transcriptResponse } = await axios.get(
-        `https://bland.abubakarkhalid.com/call_transcript/${callId}`
-      );
-
-      setResponse(transcriptResponse); // Assuming the response contains the transcript
-
-      setShowBasic(false);
-      setShowAdvanced(false);
-      setShowResponse(true);
     } catch (error: any) {
       toast.error(
         error.response?.data?.message ||
           "An error occurred while processing the request."
       );
-      console.error("Error:", error.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGetTranscript = async () => {
+    if (!callId) {
+      toast.error("Call ID is not available.");
+      return;
+    }
+
+    try {
+      setTranscriptLoading(true);
+      setTranscriptDisabled(true);
+
+      const response = await axios.get(
+        `https://bland.abubakarkhalid.com/call_transcript/${callId}`
+      );
+
+      const { status, summary, concatenated_transcript } = JSON.parse(
+        response.data
+      );
+
+      if (status === "queued") {
+        toast.info("Call is not initialized yet.");
+        setTimeout(() => setTranscriptDisabled(false), 10000);
+      } else if (status === "no-answer") {
+        toast.error("Call was not answered.");
+        setTranscriptDisabled(false);
+      } else if (status === "busy") {
+        toast.error("User declined the call.");
+        setTranscriptDisabled(false);
+      } else if (status === "completed") {
+        toast.success("Transcript generated successfully!");
+        setResponse(summary);
+        setConcatenatedTranscript(concatenated_transcript);
+        setTranscriptDisabled(false);
+      } else {
+        toast.error("Unknown status received.");
+        setTranscriptDisabled(false);
+      }
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.message || "Error fetching call transcript."
+      );
+    } finally {
+      setTranscriptLoading(false);
     }
   };
 
@@ -246,9 +285,7 @@ const CallPage: React.FC = () => {
             {basicFeatures.map((field) => (
               <div
                 key={field.key}
-                className={
-                  field.type === "textarea" ? "md:col-span-2" : "col-span-1"
-                }
+                
               >
                 {field.type === "text" && (
                   <Input
@@ -347,17 +384,64 @@ const CallPage: React.FC = () => {
         </Button>
       </div>
 
+      {/* Get Transcript Button */}
+      {callId && (
+        <div className="text-center mt-4">
+          <Button
+            onClick={handleGetTranscript}
+            variant="secondary"
+            className={`h-[52px] ${
+              isTranscriptDisabled ? "bg-gray-400 cursor-not-allowed" : ""
+            }`}
+            block
+            disabled={transcriptLoading || isTranscriptDisabled}
+          >
+            {transcriptLoading ? <Loader /> : "Get Transcript"}
+          </Button>
+        </div>
+      )}
+
       {/* Response Section */}
-      {showResponse && (
+      {response && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="mt-8 bg-gray-900 text-white p-4 rounded-md"
         >
-          <h2 className="text-xl font-bold">Response:</h2>
-          <p>{response || "No response available."}</p>
+          <h2 className="text-xl font-bold">Transcript Summary:</h2>
+          <p>{response}</p>
+          {concatenatedTranscript && (
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              variant="primary"
+              className="mt-4"
+            >
+              View Full Transcript
+            </Button>
+          )}
         </motion.div>
+      )}
+
+      {/* Modal for Full Transcript */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white text-black  p-6 rounded-lg max-w-xl w-full">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Full Transcript</h2>
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="cursor-pointer"
+                onClick={() => setIsModalOpen(false)}
+              />
+            </div>
+            <div className="overflow-y-auto max-h-96">
+              <pre className="whitespace-pre-wrap">
+                {concatenatedTranscript}
+              </pre>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
