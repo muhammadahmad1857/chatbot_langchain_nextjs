@@ -125,7 +125,7 @@ export const CallToAction = () => {
             <h2 className="text-gray-200 font-semibold text-3xl md:text-4xl lg:text-5xl max-w-3xl mx-auto text-center leading-tight">
               Join the AI Revolution with
               <span className="relative">
-                <span> cognify labz</span>
+                <span> Kognifi</span>
                 <span
                   className="absolute top-full left-0 w-full h-4 linear-gradient -translate-y-1/2"
                   style={{
@@ -138,8 +138,8 @@ export const CallToAction = () => {
               </span>
             </h2>
             <p className="text-center text-xl mt-8 max-w-2xl mx-auto">
-              Experience the transformative power of Ai with cognify labz. Boost
-              your productivity and streamline your workflow with our innovative
+              Experience the transformative power of Ai with Kognifi. Boost your
+              productivity and streamline your workflow with our innovative
               AI-chat platform.
             </p>
             {/* <div className="flex justify-center mt-10">

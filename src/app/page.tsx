@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Hero
-        desc={`Harness the power of AI with cognify labz. Elevate your productivity
+        desc={`Harness the power of AI with Kognifi. Elevate your productivity
               and streamline your workflow with our cutting-edge platform.`}
         btnPath="#projects"
         btnText="See our projects"

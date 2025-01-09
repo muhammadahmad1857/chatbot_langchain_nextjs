@@ -51,7 +51,7 @@ export const Footer = () => {
         <div className="flex flex-col lg:flex-row lg:justify-between items-center gap-8">
           <Link href={"/"} className="flex gap-4 items-center">
             <Logo />
-            <div className="font-extrabold text-2xl">cognify labz</div>
+            <div className="font-extrabold text-2xl">Kognifi</div>
           </Link>{" "}
           <nav className="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
             {navItems.map((item) => (
@@ -87,7 +87,7 @@ export const Footer = () => {
           </div>
 
           <p className="text-gray-500 text-sm">
-            &copy; cognify labz, All rights reserved,
+            &copy; Kognifi, All rights reserved,
           </p>
         </div>
       </div>

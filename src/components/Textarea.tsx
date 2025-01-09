@@ -43,7 +43,7 @@ const TextArea = ({
   }, [isFocused, angle]);
 
   return (
-    <div className={twMerge(`relative w-full  max-w-md mx-auto `, className)}>
+    <div className={twMerge(`relative w-full  mx-auto `, className)}>
       {/* Label at the Top */}
       <motion.label
         htmlFor={id}
@@ -64,7 +64,7 @@ const TextArea = ({
         onBlur={() => setIsFocused(false)}
         style={{ background }}
         value={value} // Added value attribute
-        className={`w-full px-4 py-3 rounded-lg outline-none border-gradient resize-none hover:shadow-xl transition-all duration-500 min-h-[120px] ${
+        className={`w-full px-4 py-3 rounded-lg outline-none border-gradient resize-y max-h-[600px] hover:shadow-xl transition-all duration-500 min-h-[120px] ${
           disabled && "opacity-50 cursor-not-allowed"
         }`}
         disabled={disabled} // Added disabled attribute

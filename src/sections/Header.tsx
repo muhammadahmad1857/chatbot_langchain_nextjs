@@ -47,7 +47,7 @@ export const Header = () => {
           <div className="h-18 lg:h-20 flex justify-between items-center">
             <Link href={"/"} className="flex gap-4 items-center">
               <Logo />
-              <div className="font-extrabold text-2xl">cognify labz</div>
+              <div className="font-extrabold text-2xl">Kognifi</div>
             </Link>
 
             <div className="h-full hidden lg:block">

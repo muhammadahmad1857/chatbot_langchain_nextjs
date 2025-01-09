@@ -118,7 +118,7 @@ export const Hero = ({
             <h1 className="text-4xl md:text-5xl lg:text-6xlfont-semibold text-gray-100 text-center leading-tight">
               Unlock the Future of AI with{" "}
               <span className="relative">
-                <span>{projectName || "cognify labz"}</span>
+                <span>{projectName || "Kognifi"}</span>
                 <span
                   className="absolute w-full left-0 top-full -translate-y-1/2 h-4 linear-gradient"
                   style={{

@@ -18,7 +18,7 @@ const spaceGroteskFont = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "AI projects web || Every AI solution you need",
-  description: "Created by cognify labz",
+  description: "Created by Kognifi",
 };
 
 export default function RootLayout({
