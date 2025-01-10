@@ -1,4 +1,4 @@
-// // 
+// //
 // "use client";
 
 // import { useState } from "react";
@@ -209,7 +209,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             animate="open"
             exit="closed"
             variants={dropdownVariants}
-            className="absolute mt-2 w-full z-50 max-h-48 bg-[#300E20] rounded-lg shadow-lg border border-black overflow-auto"
+            className="absolute mt-2 w-full z-[10000000000] max-h-48 bg-[#300E20] rounded-lg shadow-lg border border-black overflow-auto"
           >
             {options.map((option, index) => (
               <li

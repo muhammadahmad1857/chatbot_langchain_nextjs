@@ -14,129 +14,8 @@ import {
   faChevronUp,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-
+import {basicFeatures,advancedFeatures} from "@/app/data/data"
 const CallPage: React.FC = () => {
-  const basicFeatures = [
-    {
-      key: "phone_number",
-      type: "text",
-      label: "Phone Number",
-      placeholder: "Enter phone number",
-      defaultValue: "",
-    },
-    {
-      key: "background_track",
-      type: "dropdown",
-      label: "Background Track",
-      options: ["null", "office", "cafe", "restaurant", "none"],
-      defaultValue: "office",
-    },
-    {
-      key: "first_sentence",
-      type: "textarea",
-      label: "First Sentence",
-      placeholder: "Enter the first sentence",
-      defaultValue: "",
-    },
-    {
-      key: "task",
-      type: "textarea",
-      label: "Task",
-      placeholder: "Enter task",
-      defaultValue: "",
-    },
-    {
-      key: "voice",
-      type: "dropdown",
-      label: "Voice",
-      options: ["Josh", "Florian", "Derek", "June", "Nat", "Paige"],
-      defaultValue: "Nat",
-    },
-
-    {
-      key: "language",
-      type: "dropdown",
-      label: "Language",
-      options: [
-        "en",
-        "en-US",
-        "en-GB",
-        "en-AU",
-        "en-NZ",
-        "en-IN",
-        "zh",
-        "zh-CN",
-      ],
-      defaultValue: "en",
-    },
-  ];
-
-  const advancedFeatures = [
-    {
-      key: "wait_for_greeting",
-      type: "dropdown",
-      label: "Wait for Greeting",
-      options: ["true", "false"],
-      defaultValue: false,
-    },
-    {
-      key: "block_interruptions",
-      type: "dropdown",
-      label: "Block Interruptions",
-      options: ["true", "false"],
-      defaultValue: false,
-    },
-    {
-      key: "interruption_threshold",
-      type: "text",
-      label: "Interruption Threshold",
-      placeholder: "Enter interruption threshold",
-      defaultValue: 100,
-    },
-    {
-      key: "model",
-      type: "text",
-      label: "Model",
-      placeholder: "Enter model",
-      defaultValue: "enhanced",
-    },
-    {
-      key: "temperature",
-      type: "text",
-      label: "Temperature",
-      placeholder: "Enter temperature (e.g., 0.7)",
-      defaultValue: 0.7,
-    },
-    {
-      key: "keywords",
-      type: "text",
-      label: "Keywords",
-      placeholder: "Enter keywords (comma-separated)",
-      defaultValue: [],
-    },
-    {
-      key: "noise_cancellation",
-      type: "dropdown",
-      label: "Noise Cancellation",
-      options: ["true", "false"],
-      defaultValue: true,
-    },
-    {
-      key: "ignore_button_press",
-      type: "dropdown",
-      label: "Ignore Button Press",
-      options: ["true", "false"],
-      defaultValue: true,
-    },
-    {
-      key: "tools",
-      type: "text",
-      label: "Tools",
-      placeholder: "Enter tools (comma-separated)",
-      defaultValue: [],
-    },
-  ];
-
   const [formState, setFormState] = useState<Record<string, any>>({
     ...Object.fromEntries(
       basicFeatures.map((field) => [field.key, field.defaultValue || ""])
@@ -179,10 +58,18 @@ const CallPage: React.FC = () => {
         ...formState,
         interruption_threshold: Number(formState.interruption_threshold),
         temperature: Number(formState.temperature),
-        wait_for_greeting: formState.wait_for_greeting === "true",
-        block_interruptions: formState.block_interruptions === "true",
-        noise_cancellation: formState.noise_cancellation === "true",
-        ignore_button_press: formState.ignore_button_press === "true",
+        wait_for_greeting:
+          formState.wait_for_greeting === "true" ||
+          formState.wait_for_greeting === "false",
+        block_interruptions:
+          formState.block_interruptions === "true" ||
+          formState.block_interruptions === "false",
+        noise_cancellation:
+          formState.noise_cancellation === "true" ||
+          formState.noise_cancellation === "false",
+        ignore_button_press:
+          formState.ignore_button_press === "true" ||
+          formState.ignore_button_press === "false",
         tools: Array.isArray(formState.tools) ? formState.tools : [],
         keywords: Array.isArray(formState.keywords) ? formState.keywords : [],
       };
@@ -284,41 +171,45 @@ const CallPage: React.FC = () => {
           className="overflow-hidden"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-            {basicFeatures.map((field) => (
-              <div key={field.key}>
-                {field.type === "text" && (
-                  <Input
-                    id={field.key}
-                    label={field.label}
-                    placeholder={field.placeholder}
-                    setText={(value) => handleChange(field.key, value)}
-                    value={formState[field.key]}
-                    disabled={loading}
-                  />
-                )}
-                {field.type === "textarea" && (
-                  <TextArea
-                    id={field.key}
-                    label={field.label}
-                    placeholder={field.placeholder}
-                    setText={(value) => handleChange(field.key, value)}
-                    value={formState[field.key]}
-                    disabled={loading}
-                  />
-                )}
-                {field.type === "dropdown" && (
-                  <Dropdown
-                    label={field.label}
-                    options={field.options || []}
-                    selectedOption={formState[field.key]}
-                    setSelectedOption={(value) =>
-                      handleChange(field.key, value)
-                    }
-                    disabled={loading}
-                  />
-                )}
-              </div>
-            ))}
+            {basicFeatures.map((field) => {
+              console.log(field.options);
+
+              return (
+                <div key={field.key}>
+                  {field.type === "text" && (
+                    <Input
+                      id={field.key}
+                      label={field.label}
+                      placeholder={field.placeholder}
+                      setText={(value) => handleChange(field.key, value)}
+                      value={formState[field.key]}
+                      disabled={loading}
+                    />
+                  )}
+                  {field.type === "textarea" && (
+                    <TextArea
+                      id={field.key}
+                      label={field.label}
+                      placeholder={field.placeholder}
+                      setText={(value) => handleChange(field.key, value)}
+                      value={formState[field.key]}
+                      disabled={loading}
+                    />
+                  )}
+                  {field.type === "dropdown" && (
+                    <Dropdown
+                      label={field.label}
+                      options={field.options || []}
+                      selectedOption={formState[field.key]}
+                      setSelectedOption={(value) =>
+                        handleChange(field.key, value)
+                      }
+                      disabled={loading}
+                    />
+                  )}
+                </div>
+              );
+            })}
           </div>
         </motion.div>
       </div>
@@ -339,7 +230,6 @@ const CallPage: React.FC = () => {
             opacity: showAdvanced ? 1 : 0,
           }}
           transition={{ duration: 0.3 }}
-          className="overflow-hidden"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             {advancedFeatures.map((field) => (
