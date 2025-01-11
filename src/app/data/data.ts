@@ -58,20 +58,6 @@ export const basicFeatures = [
     defaultValue: "office",
   },
   {
-    key: "first_sentence",
-    type: "textarea",
-    label: "First Sentence",
-    placeholder: "Enter the first sentence",
-    defaultValue: "",
-  },
-  {
-    key: "task",
-    type: "textarea",
-    label: "Task",
-    placeholder: "Enter task",
-    defaultValue: "",
-  },
-  {
     key: "voice",
     type: "dropdown",
     label: "Voice",
@@ -85,6 +71,20 @@ export const basicFeatures = [
     label: "Language",
     options: languages,
     defaultValue: "en",
+  },
+  {
+    key: "first_sentence",
+    type: "textarea",
+    label: "First Sentence",
+    placeholder: "Enter the first sentence",
+    defaultValue: "",
+  },
+  {
+    key: "task",
+    type: "textarea",
+    label: "Task",
+    placeholder: "Enter task",
+    defaultValue: "",
   },
 ];
 

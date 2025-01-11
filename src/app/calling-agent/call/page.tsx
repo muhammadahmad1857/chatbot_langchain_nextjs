@@ -14,7 +14,7 @@ import {
   faChevronUp,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import {basicFeatures,advancedFeatures} from "@/app/data/data"
+import { basicFeatures, advancedFeatures } from "@/app/data/data";
 const CallPage: React.FC = () => {
   const [formState, setFormState] = useState<Record<string, any>>({
     ...Object.fromEntries(
@@ -172,8 +172,6 @@ const CallPage: React.FC = () => {
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             {basicFeatures.map((field) => {
-              console.log(field.options);
-
               return (
                 <div key={field.key}>
                   {field.type === "text" && (
