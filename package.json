@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
   },
   "proxy": "https://bland.abubakarkhalid.com",
   "dependencies": {
