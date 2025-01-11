@@ -4,7 +4,7 @@ import Technologies from "@/sections/Technologies";
 import Hero from "@/sections/Hero";
 import Members from "@/sections/members";
 import { ProjectsSection } from "@/sections/Projects";
-import SignIn from "@/components/sign-in";
+// import SignIn from "@/components/sign-in";
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
                   emotion to an art?"
         showImage={true}
       />
-      <SignIn />
+      {/* <SignIn /> */}
       <Companies />
       <Technologies />
       <ProjectsSection />
