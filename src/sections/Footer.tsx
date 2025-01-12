@@ -11,18 +11,18 @@ import Link from "next/link";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const navItems = [
-  {
-    name: "Technologies",
-    href: "/#technology",
-  },
+  // {
+  //   name: "Technologies",
+  //   href: "/#technology",
+  // },
 
   {
-    name: "Developers",
-    href: "/#devs",
+    name: "Services",
+    href: "/#services",
   },
   {
-    name: "projects",
-    href: "/#projects",
+    name: "Calling Agent-try out",
+    href: "/call",
   },
 ];
 

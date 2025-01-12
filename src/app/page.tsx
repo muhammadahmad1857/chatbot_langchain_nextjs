@@ -42,12 +42,12 @@ const CallingAgent = () => {
   return (
     <>
       <Hero
-        btnPath="#call"
+        btnPath="#services"
         btnText="Click to see services!"
         desc="We create art that shines. Art that brings joy, inspires, and brings understanding."
         projectName="Calling Agent"
       />
-      <section id="call">
+      <section id="services">
         <div className="container">
           <SectionBorder borderTop>
             <SectionContent>

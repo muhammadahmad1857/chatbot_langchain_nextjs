@@ -217,7 +217,7 @@ const CallPage: React.FC = () => {
       <div className="mt-6">
         <div
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="cursor-pointer relative z-50 bg-gray-800 text-white px-4 py-2 rounded-md flex justify-between items-center"
+          className="cursor-pointer relative z-20 bg-gray-800 text-white px-4 py-2 rounded-md flex justify-between items-center"
         >
           <span>Advanced Features</span>
           <FontAwesomeIcon icon={showAdvanced ? faChevronUp : faChevronDown} />
