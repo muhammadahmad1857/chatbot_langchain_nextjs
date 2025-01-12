@@ -126,7 +126,7 @@ const CallPage: React.FC = () => {
         toast.info("Call is not initialized yet.");
         setTimeout(() => setTranscriptDisabled(false), 10000);
       }
-      if (status === "in-progress") {
+      else if (status === "in-progress") {
         toast.info("Call is in progress.");
         setTimeout(() => setTranscriptDisabled(false), 10000);
       } else if (status === "ringing") {
