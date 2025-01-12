@@ -216,7 +216,6 @@ const CallPage: React.FC = () => {
                       options={field.options || []}
                       selectedOption={formState[field.key]}
                       setSelectedOption={(value) => {
-                        console.log(value);
                         handleChange(field.key, value.value);
                       }}
                       disabled={loading}
