@@ -5,8 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
+interface Option {
+  label: string;
+  value?: string;
+}
+
 interface DropdownProps {
-  options: string[];
+  options: Option[] | string[];
   selectedOption: string;
   setSelectedOption: (value: string) => void;
   label: string;
@@ -90,9 +95,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         <span>{selectedOption}</span>
         <FontAwesomeIcon
           icon={faChevronDown}
-          className={`transition-transform ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
+          className={`transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
         />
       </button>
       {/* Dropdown Menu with AnimatePresence */}
@@ -105,19 +108,22 @@ const Dropdown: React.FC<DropdownProps> = ({
             variants={dropdownVariants}
             className="absolute mt-2 w-full z-50 max-h-36 bg-[#300E20] rounded-lg shadow-lg border border-black overflow-auto"
           >
-            {options.map((option, index) => (
-              <li
-                key={index}
-                className={`px-4 py-2 text-gray-300 hover:bg-black hover:pl-6 transition-all cursor-pointer ${
-                  selectedOption === option
-                    ? "border-gradient rounded-lg font-semibold"
-                    : ""
-                }`}
-                onClick={() => handleSelect(option)}
-              >
-                {option}
-              </li>
-            ))}
+            {options.map((option, index) => {
+              const label = typeof option === "string" ? option : option.label;
+              const value = typeof option === "string" ? option : option.value;
+
+              return (
+                <li
+                  key={index}
+                  className={`px-4 py-2 text-gray-300 hover:bg-black hover:pl-6 transition-all cursor-pointer ${
+                    selectedOption === value ? "border-gradient rounded-lg font-semibold" : ""
+                  }`}
+                  onClick={() => handleSelect(value!)}
+                >
+                  {label}
+                </li>
+              );
+            })}
           </motion.ul>
         )}
       </AnimatePresence>

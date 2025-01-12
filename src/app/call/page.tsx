@@ -173,7 +173,12 @@ const CallPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             {basicFeatures.map((field) => {
               return (
-                <div key={field.key}>
+                <div
+                  key={field.key}
+                  className={
+                    field.type === "textarea" ? "md:col-span-2  col-span-1" : "col-span-1"
+                  }
+                >
                   {field.type === "text" && (
                     <Input
                       id={field.key}
@@ -192,7 +197,7 @@ const CallPage: React.FC = () => {
                       setText={(value) => handleChange(field.key, value)}
                       value={formState[field.key]}
                       disabled={loading}
-                      className="col-span-2"
+                      className="w-full md:max-w-5xl"
                     />
                   )}
                   {field.type === "dropdown" && (
@@ -274,7 +279,7 @@ const CallPage: React.FC = () => {
 
       {/* Get Transcript Button */}
       {callId && (
-        <div className="text-center mt-4">
+        <div className="text-center mt-4 relative z-20">
           <Button
             onClick={handleGetTranscript}
             variant="secondary"
@@ -303,7 +308,7 @@ const CallPage: React.FC = () => {
             <Button
               onClick={() => setIsModalOpen(true)}
               variant="primary"
-              className="mt-4"
+              className="mt-4 relative z-20"
             >
               View Full Transcript
             </Button>
@@ -313,7 +318,7 @@ const CallPage: React.FC = () => {
 
       {/* Modal for Full Transcript */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white text-black  p-6 rounded-lg max-w-xl w-full">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Full Transcript</h2>
