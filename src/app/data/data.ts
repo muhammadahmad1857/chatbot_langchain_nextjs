@@ -87,7 +87,10 @@ export const basicFeatures = [
       label: `${language.name} (${language.code})`, // Display name and code
       value: language.code, // Send only the code to the backend
     })),
-    defaultValue: `${languages[0].name} (${languages[0].code})`,
+    defaultValue: {
+      label: `${languages[0].name} (${languages[0].code})`,
+      code:languages[0].code,
+    },
   },
 ];
 

@@ -7,13 +7,13 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface Option {
   label: string;
-  value?: string;
+  value: string;
 }
 
 interface DropdownProps {
   options: Option[] | string[];
-  selectedOption: string;
-  setSelectedOption: (value: string) => void;
+  selectedOption: Option;
+  setSelectedOption: (value: Option) => void;
   label: string;
   disabled?: boolean;
 }
@@ -34,7 +34,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
   };
 
-  const handleSelect = (option: string) => {
+  const handleSelect = (option: Option) => {
     setSelectedOption(option);
     setIsOpen(false);
   };
@@ -92,10 +92,12 @@ const Dropdown: React.FC<DropdownProps> = ({
         }`}
         disabled={disabled}
       >
-        <span>{selectedOption}</span>
+        <span>{selectedOption?.label}</span>
         <FontAwesomeIcon
           icon={faChevronDown}
-          className={`transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
+          className={`transition-transform ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
         />
       </button>
       {/* Dropdown Menu with AnimatePresence */}
@@ -111,14 +113,16 @@ const Dropdown: React.FC<DropdownProps> = ({
             {options.map((option, index) => {
               const label = typeof option === "string" ? option : option.label;
               const value = typeof option === "string" ? option : option.value;
-
+              console.log("value,", value);
               return (
                 <li
                   key={index}
                   className={`px-4 py-2 text-gray-300 hover:bg-black hover:pl-6 transition-all cursor-pointer ${
-                    selectedOption === value ? "border-gradient rounded-lg font-semibold" : ""
+                    selectedOption.value === value
+                      ? "border-gradient rounded-lg font-semibold"
+                      : ""
                   }`}
-                  onClick={() => handleSelect(value!)}
+                  onClick={() => handleSelect({label:label,value:value!})}
                 >
                   {label}
                 </li>

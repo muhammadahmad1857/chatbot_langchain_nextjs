@@ -50,6 +50,7 @@ const CallPage: React.FC = () => {
       toast.error("Please fill in all required fields.");
       return;
     }
+    console.log(formState);
 
     try {
       setLoading(true);
@@ -74,10 +75,13 @@ const CallPage: React.FC = () => {
         keywords: Array.isArray(formState.keywords) ? formState.keywords : [],
       };
 
+      console.log(payload);
       const response = await axios.post(
         "https://bland.abubakarkhalid.com/send_call",
         payload
       );
+
+      console.log(payload);
 
       const data = JSON.parse(response.data);
       const callId = data.call_id;
@@ -120,6 +124,10 @@ const CallPage: React.FC = () => {
 
       if (status === "queued") {
         toast.info("Call is not initialized yet.");
+        setTimeout(() => setTranscriptDisabled(false), 10000);
+      }
+      if (status === "in-progress") {
+        toast.info("Call is in progress.");
         setTimeout(() => setTranscriptDisabled(false), 10000);
       } else if (status === "ringing") {
         toast.info("Call is not initialized yet.");
@@ -176,7 +184,9 @@ const CallPage: React.FC = () => {
                 <div
                   key={field.key}
                   className={
-                    field.type === "textarea" ? "md:col-span-2  col-span-1" : "col-span-1"
+                    field.type === "textarea"
+                      ? "md:col-span-2  col-span-1"
+                      : "col-span-1"
                   }
                 >
                   {field.type === "text" && (
@@ -205,9 +215,10 @@ const CallPage: React.FC = () => {
                       label={field.label}
                       options={field.options || []}
                       selectedOption={formState[field.key]}
-                      setSelectedOption={(value) =>
-                        handleChange(field.key, value)
-                      }
+                      setSelectedOption={(value) => {
+                        console.log(value);
+                        handleChange(field.key, value.value);
+                      }}
                       disabled={loading}
                     />
                   )}
@@ -254,7 +265,7 @@ const CallPage: React.FC = () => {
                     options={field.options || []}
                     selectedOption={formState[field.key]}
                     setSelectedOption={(value) =>
-                      handleChange(field.key, value)
+                      handleChange(field.key, value.value)
                     }
                     disabled={loading}
                   />
