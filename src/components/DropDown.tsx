@@ -12,8 +12,8 @@ interface Option {
 
 interface DropdownProps {
   options: Option[] | string[];
-  selectedOption: Option;
-  setSelectedOption: (value: Option) => void;
+  selectedOption: string;
+  setSelectedOption: (value: string) => void;
   label: string;
   disabled?: boolean;
 }
@@ -34,7 +34,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     }
   };
 
-  const handleSelect = (option: Option) => {
+  const handleSelect = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false);
   };
@@ -92,7 +92,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         }`}
         disabled={disabled}
       >
-        <span>{selectedOption?.label}</span>
+        <span>{selectedOption}</span>
         <FontAwesomeIcon
           icon={faChevronDown}
           className={`transition-transform ${
@@ -118,11 +118,11 @@ const Dropdown: React.FC<DropdownProps> = ({
                 <li
                   key={index}
                   className={`px-4 py-2 text-gray-300 hover:bg-black hover:pl-6 transition-all cursor-pointer ${
-                    selectedOption.value === value
+                    selectedOption === value
                       ? "border-gradient rounded-lg font-semibold"
                       : ""
                   }`}
-                  onClick={() => handleSelect({label:label,value:value!})}
+                  onClick={() => handleSelect(value!)}
                 >
                   {label}
                 </li>

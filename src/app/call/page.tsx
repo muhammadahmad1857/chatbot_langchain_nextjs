@@ -216,7 +216,8 @@ const CallPage: React.FC = () => {
                       options={field.options || []}
                       selectedOption={formState[field.key]}
                       setSelectedOption={(value) => {
-                        handleChange(field.key, value.value);
+                        console.log(value);
+                        handleChange(field.key, value);
                       }}
                       disabled={loading}
                     />
@@ -264,7 +265,7 @@ const CallPage: React.FC = () => {
                     options={field.options || []}
                     selectedOption={formState[field.key]}
                     setSelectedOption={(value) =>
-                      handleChange(field.key, value.value)
+                      handleChange(field.key, value)
                     }
                     disabled={loading}
                   />
