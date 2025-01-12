@@ -9,21 +9,21 @@ import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export const navItems = [
-  {
-    name: "Technologies",
-    href: "/#technology",
-  },
-  {
-    name: "Developers",
-    href: "/#devs",
-  },
+//   {
+//     name: "Technologies",
+//     href: "/#technology",
+//   },
+//   {
+//     name: "Developers",
+//     href: "/#devs",
+//   },
 ];
 
 export const btnItems = [
   {
     buttonVariant: "primary",
-    name: "Projects",
-    href: "/#projects",
+    name: "Try it",
+    href: "/call",
   },
 ] satisfies {
   buttonVariant: ButtonProps["variant"];

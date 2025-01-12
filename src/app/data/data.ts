@@ -44,6 +44,20 @@ const languages = [
 
 export const basicFeatures = [
   {
+    key: "first_sentence",
+    type: "textarea",
+    label: "First Sentence",
+    placeholder: "Enter the first sentence",
+    defaultValue: "",
+  },
+  {
+    key: "task",
+    type: "textarea",
+    label: "Task",
+    placeholder: "Enter task",
+    defaultValue: "",
+  },
+  {
     key: "phone_number",
     type: "text",
     label: "Phone Number",
@@ -72,20 +86,7 @@ export const basicFeatures = [
     options: languages,
     defaultValue: "en",
   },
-  {
-    key: "first_sentence",
-    type: "textarea",
-    label: "First Sentence",
-    placeholder: "Enter the first sentence",
-    defaultValue: "",
-  },
-  {
-    key: "task",
-    type: "textarea",
-    label: "Task",
-    placeholder: "Enter task",
-    defaultValue: "",
-  },
+ 
 ];
 
 export const advancedFeatures = [

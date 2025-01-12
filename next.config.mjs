@@ -27,8 +27,6 @@ const nextConfig = {
 
     return config;
   },
-  crossOrigin: 'anonymous',
-
 
   // ...other config
 };

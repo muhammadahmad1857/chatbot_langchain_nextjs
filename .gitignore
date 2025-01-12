@@ -35,10 +35,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-src/components/sign-in.tsx
-src/lib/routes.ts
-src/app/api/auth/\[...nextauth]/route.ts
-src/middleware.ts
-src/auth.ts
-src/auth.config.ts
-src/app/page.tsx
+

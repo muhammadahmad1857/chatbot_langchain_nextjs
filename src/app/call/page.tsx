@@ -168,7 +168,7 @@ const CallPage: React.FC = () => {
             opacity: showBasic ? 1 : 0,
           }}
           transition={{ duration: 0.3 }}
-          className="overflow-hidden"
+          // className="overflow-hidden"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
             {basicFeatures.map((field) => {
@@ -260,7 +260,7 @@ const CallPage: React.FC = () => {
       </div>
 
       {/* Submit Button */}
-      <div className="text-center mt-8">
+      <div className="text-center mt-8 relative z-20">
         <Button
           onClick={handleSubmit}
           variant="primary"

@@ -22,7 +22,7 @@ const portfolioProjects = [
       { title: "Can call on your behalf" },
       { title: "Can give you transcript of the call" },
     ],
-    link: "/calling-agent",
+    link: "",
     image: project1,
   },
   //  {
@@ -63,7 +63,6 @@ const portfolioProjects = [
   //   link: "/summarizer",
   //   image: project4,
   // },
-  
 ];
 
 export const ProjectsSection = () => {
